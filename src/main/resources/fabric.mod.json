@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "tidy",
+  "version": "${mod_version}",
+  "name": "Tidy",
+  "description": "Lightweight Fabric inventory management mod — sort, refill, organize.",
+  "authors": ["Inheritence"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["pl.inh.tidy.Tidy"]
+  },
+  "mixins": ["tidy.mixins.json"],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "*"
+  }
+}
