@@ -3,17 +3,26 @@
   "id": "tidy",
   "version": "${mod_version}",
   "name": "Tidy",
-  "description": "Lightweight Fabric inventory management mod — sort, refill, organize.",
+  "description": "Lightweight Fabric inventory management with sorting, auto-refill, slot locking, and configurable GUI buttons.",
   "authors": ["Inheritence"],
   "license": "MIT",
+  "icon": "assets/tidy/icon.png",
+  "contact": {
+    "homepage": "https://modrinth.com/mod/tidy"
+  },
   "environment": "client",
   "entrypoints": {
-    "client": ["pl.inh.tidy.Tidy"]
+    "client": ["pl.inh.tidy.Tidy"],
+    "modmenu": ["pl.inh.tidy.screen.TidyModMenu"]
   },
   "mixins": ["tidy.mixins.json"],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
+    "cloth-config": "*",
     "minecraft": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }

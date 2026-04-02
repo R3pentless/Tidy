@@ -1,6 +1,7 @@
 package pl.inh.tidy.sort;
 
 import net.minecraft.item.ItemStack;
+import pl.inh.tidy.compat.TidyCompat;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +13,7 @@ public class AlphaSortStrategy implements SortStrategy {
     public List<ItemStack> sort(List<ItemStack> stacks, SortContext context) {
         return stacks.stream()
                 .filter(s -> !s.isEmpty())
-                .sorted(Comparator.comparing(s -> s.getItem().toString()))
+                .sorted(Comparator.comparing(TidyCompat::itemId))
                 .collect(Collectors.toList());
     }
 }

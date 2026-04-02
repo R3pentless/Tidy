@@ -1,6 +1,7 @@
 package pl.inh.tidy.sort;
 
 import net.minecraft.item.ItemStack;
+import pl.inh.tidy.compat.TidyCompat;
 
 import java.util.Comparator;
 import java.util.List;
@@ -13,7 +14,7 @@ public class CountSortStrategy implements SortStrategy {
         return stacks.stream()
                 .filter(s -> !s.isEmpty())
                 .sorted(Comparator.comparingInt(ItemStack::getCount).reversed()
-                        .thenComparing(s -> s.getItem().toString()))
+                        .thenComparing(TidyCompat::itemId))
                 .collect(Collectors.toList());
     }
 }

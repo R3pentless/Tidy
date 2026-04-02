@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        maven("https://maven.kikugie.dev/releases")
         gradlePluginPortal()
         maven("https://maven.fabricmc.net/")
     }

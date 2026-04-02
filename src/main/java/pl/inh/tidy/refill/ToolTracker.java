@@ -1,7 +1,9 @@
 package pl.inh.tidy.refill;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import pl.inh.tidy.compat.TidyCompat;
 
 public final class ToolTracker {
 
@@ -9,27 +11,29 @@ public final class ToolTracker {
 
     private static ItemStack lastStack = ItemStack.EMPTY;
     private static int lastSlot = -1;
+    private static ItemStack lastOffhandStack = ItemStack.EMPTY;
 
-    public static void tick(PlayerEntity player) {
-        //? 1.18.2 .. 1.20.4
-        /*var inv = player.inventory;*/
-        //? 1.21 ..
+    public static void tick(MinecraftClient client, PlayerEntity player) {
         var inv = player.getInventory();
 
-        int selected = inv.selectedSlot;
+        int selected = TidyCompat.selectedSlot(inv);
         ItemStack current = inv.getStack(selected);
 
-        if (current.getItem() != lastStack.getItem() || selected != lastSlot) {
-            lastStack = current.isEmpty() ? ItemStack.EMPTY : current.copy();
-            lastSlot = selected;
+        // Detect item consumed or tool broken in the held slot
+        if (selected == lastSlot && !lastStack.isEmpty() && current.isEmpty()) {
+            RefillHandler.onItemGone(client, player, selected, lastStack);
         }
+
+        ItemStack currentOffhand = player.getOffHandStack();
+        if (client.currentScreen == null && !lastOffhandStack.isEmpty() && currentOffhand.isEmpty()) {
+            RefillHandler.onOffhandItemGone(client, player, lastOffhandStack);
+        }
+
+        lastSlot = selected;
+        lastStack = current.isEmpty() ? ItemStack.EMPTY : current.copy();
+        lastOffhandStack = currentOffhand.isEmpty() ? ItemStack.EMPTY : currentOffhand.copy();
     }
 
-    public static ItemStack getLastStack() {
-        return lastStack;
-    }
-
-    public static int getLastSlot() {
-        return lastSlot;
-    }
+    public static ItemStack getLastStack() { return lastStack; }
+    public static int getLastSlot()       { return lastSlot; }
 }
