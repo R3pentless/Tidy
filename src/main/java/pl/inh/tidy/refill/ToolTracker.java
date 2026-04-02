@@ -19,7 +19,6 @@ public final class ToolTracker {
         int selected = TidyCompat.selectedSlot(inv);
         ItemStack current = inv.getStack(selected);
 
-        // Detect item consumed or tool broken in the held slot
         if (selected == lastSlot && !lastStack.isEmpty() && current.isEmpty()) {
             RefillHandler.onItemGone(client, player, selected, lastStack);
         }

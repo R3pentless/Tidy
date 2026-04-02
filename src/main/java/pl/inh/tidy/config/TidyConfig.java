@@ -19,8 +19,7 @@ public class TidyConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String FILE_NAME = "tidy.json";
 
-    // Sort settings
-    public String sortMode = "category"; // category | alpha | count
+    public String sortMode = "category";
     public boolean lockHotbar = true;
     public boolean middleClickSort = true;
     public boolean showContainerButtons = true;
@@ -37,7 +36,6 @@ public class TidyConfig {
     public int sortRowsOffsetY = 0;
     public int configButtonOffsetX = 0;
     public int configButtonOffsetY = 0;
-    // Legacy shared offsets kept for migration.
     public int buttonOffsetX = 0;
     public int buttonOffsetY = 0;
     public int buttonSpacing = 2;
@@ -45,7 +43,6 @@ public class TidyConfig {
     public ButtonLayoutProfile singleStorageButtonLayout = new ButtonLayoutProfile();
     public ButtonLayoutProfile doubleStorageButtonLayout = new ButtonLayoutProfile();
 
-    // Refill settings
     public boolean autoRefill = true;
     public boolean refillBlocks = true;
     public boolean refillOffhandTotems = true;
@@ -53,7 +50,6 @@ public class TidyConfig {
     public int lowDurabilityThreshold = 10;
     public boolean elytraBreakWarning = true;
 
-    // Locked player inventory slots
     public List<Integer> lockedSlots = new ArrayList<>();
 
     public static TidyConfig load() {

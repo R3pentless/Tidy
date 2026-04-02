@@ -254,7 +254,6 @@ public final class TidyCompat {
             Object tooltipInstance = tooltipClass.getMethod("of", Text.class).invoke(null, tooltip);
             widget.getClass().getMethod("setTooltip", tooltipClass).invoke(widget, tooltipInstance);
         } catch (ReflectiveOperationException ignored) {
-            // Old versions don't expose widget tooltips in the same way.
         }
     }
 
@@ -327,7 +326,6 @@ public final class TidyCompat {
             );
             drawTexture.invoke(context, texture, x, y, 0, 0, width, height);
         } catch (ReflectiveOperationException ignored) {
-            // MatrixStack-era screens use a different rendering pipeline. Legacy branches no-op here.
         }
     }
 
